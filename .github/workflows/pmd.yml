@@ -1,0 +1,17 @@
+name: PMD
+
+on: [pull_request, workflow_dispatch]
+
+jobs:
+  pmd:
+    name: runner / pmd
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dbelyaev/action-pmd@master
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          filter_mode: nofilter
+          rulesets_path: rulesets/java/quickstart.xml
+          workdir: ./testdata/java
